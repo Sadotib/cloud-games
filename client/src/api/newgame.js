@@ -10,14 +10,14 @@ import { connectWebSocket } from "./websocket.js"
 //     logBox.scrollTop = logBox.scrollHeight
 // }
 
+export const API_BASE = `${location.protocol}//${location.hostname}:8080`;
+console.log("API_BASE:", API_BASE);
+
 export function createNewGame() {
     const startBtn = document.getElementById("createBtn")
     startBtn.addEventListener("click", async () => {
         console.log("Starting game...");
         // addLog("Starting game...");
-
-        const API_BASE = `${location.protocol}//${location.hostname}:8080`;
-        console.log("API_BASE:", API_BASE);
 
         try {
             const response = await fetch(`${API_BASE}/game/create/`, {
@@ -35,8 +35,8 @@ export function createNewGame() {
             const gameId = data.gameId;
 
             connectWebSocket("create", gameId, playerId);
-            
-            
+
+
             // alert(`Game created with ID: ${data.gameId}`);
         } catch (error) {
             console.error("Error creatin game:", error);

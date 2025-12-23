@@ -1,13 +1,14 @@
 // import { addLog } from "./newgame.js"
 import { showGameScreen } from "../ui/ui.js"
 import { updateRoomStatusUI } from "../ui/ui.js"
+import { API_BASE } from "./newgame.js"
 
 
 let socket = null;
 
 export function connectWebSocket(action, gameId, playerId) {
 
-    const wsUrl = `ws://localhost:8080/ws/${action}/${gameId}/${playerId}`
+    const wsUrl = `ws://${API_BASE}:8080/ws/${action}/${gameId}/${playerId}`
     console.log("Connecting WebSocket to:", wsUrl);
     // addLog("Connecting WebSocket → " + wsUrl)
 
