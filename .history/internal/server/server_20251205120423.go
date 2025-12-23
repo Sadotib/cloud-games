@@ -19,7 +19,6 @@ func NewServer() *http.Server {
 	NewServer := &Server{
 		port: port,
 	}
-	fmt.Println("running on ", port)
 
 	// Declare Server config
 	server := &http.Server{
@@ -29,6 +28,7 @@ func NewServer() *http.Server {
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
 	}
+	
 
 	return server
 }

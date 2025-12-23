@@ -19,7 +19,7 @@ func NewServer() *http.Server {
 	NewServer := &Server{
 		port: port,
 	}
-	fmt.Println("running on ", port)
+	fmt.Println("running on %d", port)
 
 	// Declare Server config
 	server := &http.Server{
