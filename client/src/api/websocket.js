@@ -8,7 +8,7 @@ let socket = null;
 
 export function connectWebSocket(action, gameId, playerId) {
 
-    const wsUrl = `ws://${API_BASE}:8080/ws/${action}/${gameId}/${playerId}`
+    const wsUrl = `ws://${API_BASE}/ws/${action}/${gameId}/${playerId}`
     console.log("Connecting WebSocket to:", wsUrl);
     // addLog("Connecting WebSocket → " + wsUrl)
 
