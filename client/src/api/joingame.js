@@ -1,11 +1,12 @@
 import { connectWebSocket } from './websocket.js'
 // import { addLog } from './newgame.js'
 import { showGameScreen } from '../ui/ui.js';
+import { API_BASE } from './newgame.js';
 
 export function joinGame(element) {
 
     const joinBtn = document.getElementById("joinBtn")
-
+    
 
 
     joinBtn.addEventListener("click", async () => {
@@ -19,7 +20,7 @@ export function joinGame(element) {
         }
 
         try {
-            const response = await fetch(`http://localhost:8080/game/join/${gameId}`, {
+            const response = await fetch(`${API_BASE}/game/join/${gameId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -31,7 +32,7 @@ export function joinGame(element) {
             console.log("Game created:", gameId, "Player ID:", playerId);
             // addLog("Game joinded with ID: " + gameId);
 
-            
+
 
             // connectWebSocket("create", gameId, playerId);
 
