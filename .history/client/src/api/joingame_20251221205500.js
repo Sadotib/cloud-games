@@ -1,0 +1,58 @@
+import { connectWebSocket } from './websocket.js'
+import { addLog } from './newgame.js'
+import { showGameScreen } from '../ui.js';
+
+export function joinGame(element) {
+
+    const joinBtn = document.getElementById("joinBtn")
+
+
+
+    joinBtn.addEventListener("click", async () => {
+        const gameId = document.getElementById("gameIdInput").value
+
+        console.log("Game ID to join:", gameId);
+
+        if (!gameId) {
+            alert("No Game ID provided")
+            return
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/game/join/${gameId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const data = await response.json();
+            const playerId = data.playerId;
+            console.log("Game created:", data.gameId, "Player ID:", playerId);
+            addLog("Game joinded with ID: " + data.gameId);
+
+            
+
+            // connectWebSocket("create", gameId, playerId);
+
+            console.log("Joining game...");
+
+            try {
+                connectWebSocket("join", gameId, playerId);
+
+                // alert(`Game created with ID: ${data.gameId}`);
+            } catch (error) {
+                console.error("Error joining game:", error);
+            }
+
+
+            // alert(`Game created with ID: ${data.gameId}`);
+        } catch (error) {
+            console.error("Error connecting to game:", error);
+        }
+
+
+
+    });
+
+}
