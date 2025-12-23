@@ -1,7 +1,5 @@
 // import { formatGameName } from '../utils/gameHome.js'
 
-import { quitGame } from "../api/quitgame"
-
 export function renderTicTacToeGame(app, gameId, playerId) {
     app.innerHTML = `
         <div class="card">
@@ -16,6 +14,12 @@ export function renderTicTacToeGame(app, gameId, playerId) {
         <button id="quitBtn">Quit Game</button>
         
       `
-      quitGame()
-    
+
+    document.getElementById('createBtn').onclick = () => startNewGame(game)
+    document.getElementById('joinBtn').onclick = () => joinGame(game)
+
+    document.getElementById('back').onclick = () => {
+        history.pushState({}, '', '/')
+        window.dispatchEvent(new Event('popstate'))
+    }
 }

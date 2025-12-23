@@ -16,11 +16,8 @@ export function createNewGame() {
         console.log("Starting game...");
         // addLog("Starting game...");
 
-        const API_BASE = `${location.protocol}//${location.hostname}:8080`;
-        console.log("API_BASE:", API_BASE);
-
         try {
-            const response = await fetch(`${API_BASE}/game/create/`, {
+            const response = await fetch("http://localhost:8080/game/create/", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
