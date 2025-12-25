@@ -10,7 +10,7 @@ import { connectWebSocket } from "./websocket.js"
 //     logBox.scrollTop = logBox.scrollHeight
 // }
 
-export const API_BASE = `${location.protocol}//${location.hostname}:8080`;
+export const API_BASE = `${location.protocol}//${location.hostname}`;
 console.log("API_BASE:", API_BASE);
 
 export function createNewGame() {
