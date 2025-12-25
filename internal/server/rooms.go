@@ -15,6 +15,14 @@ type Player struct {
 type GameRoom struct {
 	ID      string             `json:"id"`
 	Players map[string]*Player `json:"players"`
+
+	HostID  string `json:"hostId"`
+	Started bool   `json:"started"`
+
+	Board        [9]string `json:"board"`  // "", "X", "O"
+	Turn         string    `json:"turn"`   // playerId whose turn it is
+	Winner       string    `json:"winner"` // "", "draw", or playerId
+	RematchCount int
 }
 
 var rooms = make(map[string]*GameRoom)
@@ -30,6 +38,11 @@ func CreateRoom(id string) *GameRoom {
 		room = &GameRoom{
 			ID:      id,
 			Players: make(map[string]*Player),
+			Started: false,
+			HostID:  "",
+			Board:   [9]string{},
+			Turn:    "",
+			Winner:  "",
 		}
 		rooms[id] = room
 	}

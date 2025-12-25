@@ -1,7 +1,5 @@
 // import { showGameScreen } from "../ui.js"
 import { connectWebSocket } from "./websocket.js"
-import { showGameHomeScreen } from '../ui/ui.js'
-
 
 
 // let playerId = "bitopan"
@@ -12,7 +10,7 @@ import { showGameHomeScreen } from '../ui/ui.js'
 //     logBox.scrollTop = logBox.scrollHeight
 // }
 
-export const API_BASE = `${location.protocol}//${location.hostname}`;
+export const API_BASE = `${location.protocol}//${location.hostname}:8080`;
 console.log("API_BASE:", API_BASE);
 
 export function createNewGame() {
@@ -37,7 +35,6 @@ export function createNewGame() {
             const gameId = data.gameId;
 
             connectWebSocket("create", gameId, playerId);
-
 
 
             // alert(`Game created with ID: ${data.gameId}`);

@@ -22,7 +22,7 @@ export function createNewGame() {
         // addLog("Starting game...");
 
         try {
-            const response = await fetch(`${API_BASE}/api/game/create`, {
+            const response = await fetch(`${API_BASE}/api/game/create/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

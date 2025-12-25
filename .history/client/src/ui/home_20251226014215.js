@@ -30,9 +30,4 @@ export function renderHome(app) {
       window.dispatchEvent(new Event('popstate'))
     }
   })
-  const startBtn = document.createElement('button')
-  startBtn.textContent = 'Start Game'
-  startBtn.style.display = 'none'
-  app.appendChild(startBtn)
-
 }

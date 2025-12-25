@@ -22,7 +22,6 @@ export function connectWebSocket(action, gameId, playerId) {
         session.hostId = playerId;
     }
     const wsBase = API_BASE.replace(/^http/, "ws");
-     const wsBaseWithPort = wsBase.concat("");
     const wsUrl = `${wsBase}/ws/${action}/${gameId}/${playerId}`;
 
     console.log("Connecting WebSocket to:", wsUrl);

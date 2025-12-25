@@ -2,27 +2,14 @@ import { connectWebSocket } from './websocket.js'
 // import { addLog } from './newgame.js'
 import { showGameScreen } from '../ui/ui.js';
 import { API_BASE } from './newgame.js';
-import { showGameHomeScreen } from '../ui/ui.js'
-
-let joined = false;
-export function resetJoinState() {
-  joined = false;
-}
 
 export function joinGame(element) {
-
-
-
 
     const joinBtn = document.getElementById("joinBtn")
     
 
 
     joinBtn.addEventListener("click", async () => {
-        if (joined) return;
-        joined = true;
-        joinBtn.disabled = true;
-
         const gameId = document.getElementById("gameIdInput").value
 
         console.log("[CLIENT] Game ID to join:", gameId);
