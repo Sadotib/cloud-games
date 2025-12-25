@@ -177,7 +177,6 @@ func handlePlayerMessages(room *GameRoom, playerId string, conn *websocket.Conn)
 		}
 	}
 }
-
 func broadcastPlayerLeft(room *GameRoom) {
 	msg := map[string]interface{}{
 		"type": "player_left",
@@ -200,7 +199,6 @@ func broadcastGameStarted(room *GameRoom) {
 		p.Conn.WriteMessage(websocket.TextMessage, data)
 	}
 }
-
 func getNextPlayer(room *GameRoom, current string) string {
 	for id := range room.Players {
 		if id != current {
@@ -209,7 +207,6 @@ func getNextPlayer(room *GameRoom, current string) string {
 	}
 	return ""
 }
-
 func checkWinner(room *GameRoom) string {
 	b := room.Board
 	lines := [8][3]int{
@@ -237,7 +234,6 @@ func checkWinner(room *GameRoom) string {
 
 	return "draw"
 }
-
 func broadcastGameState(room *GameRoom) {
 	turnSymbol := ""
 	winnerSymbol := ""
@@ -309,7 +305,6 @@ func broadcastRoomStatus(room *GameRoom) {
 		p.Conn.WriteMessage(websocket.TextMessage, msgBytes)
 	}
 }
-
 func (room *GameRoom) BoardSymbolFor(playerId string) string {
 	if playerId == room.HostID {
 		return "X"

@@ -27,6 +27,11 @@ func (s *Server) RegisterRoutes() http.Handler {
 		api.GET("/game/create", s.CreateGameHandler)
 		api.GET("/game/join/:gameId", s.JoinGameHandler)
 	}
+	api := router.Group("/api")
+	{
+		api.GET("/game/create", s.CreateGameHandler)
+		api.GET("/game/join/:gameId", s.JoinGameHandler)
+	}
 
 	// WebSocket route
 	router.GET("/ws/:action/:gameId/:playerId", s.WebSocketHandler)
