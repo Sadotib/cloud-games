@@ -20,7 +20,7 @@ export function joinGame(element) {
         }
 
         try {
-            const url = `/api/game/join/${gameId}`;
+            const url = `${API_BASE}/api/game/join/${gameId}`;
             console.log(`[CLIENT] Sending fetch to: ${url}`);
             const response = await fetch(url, {
                 method: "GET",

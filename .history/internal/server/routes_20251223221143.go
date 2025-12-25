@@ -19,14 +19,13 @@ func (s *Server) RegisterRoutes() http.Handler {
 		AllowWebSockets:  true,
 	}))
 
-	// API
+	// router.Static("/", "./client/dist")
+	// router.NoRoute(func(c *gin.Context) {
+	// 	c.File("./client/dist/index.html")
+	// })
 
-	router.GET("/", s.HelloTestHandler)
-	api := router.Group("/api")
-	{
-		api.GET("/game/create", s.CreateGameHandler)
-		api.GET("/game/join/:gameId", s.JoinGameHandler)
-	}
+	// Basic route
+	// router.GET("/", s.HelloTestHandler)
 
 	// WebSocket route
 	router.GET("/ws/:action/:gameId/:playerId", s.WebSocketHandler)
@@ -44,16 +43,16 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// 	v2.GET("/hello", s.V2Hello)
 	// }
 
-	// ---- FRONTEND (NO wildcard conflict) ----
-	// router.Static("/assets", "/assets")
+	api := router.Group("/")
+	{
+		api.GET("/game/create", s.CreateGameHandler)
+		api.GET("/game/join/:id", s.JoinGameHandler)
+	}
 
-	// router.GET("/", func(c *gin.Context) {
-	// 	c.File("./client/dist/index.html")
-	// })
-
-	// router.NoRoute(func(c *gin.Context) {
-	// 	c.File("./client/dist/index.html")
-	// })
+	router.Static("/", "./client/dist")
+	router.NoRoute(func(c *gin.Context) {
+		c.File("./client/dist/index.html")
+	})
 
 	return router.Handler()
 }

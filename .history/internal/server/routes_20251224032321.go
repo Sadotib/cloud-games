@@ -20,15 +20,13 @@ func (s *Server) RegisterRoutes() http.Handler {
 	}))
 
 	// API
-
-	router.GET("/", s.HelloTestHandler)
 	api := router.Group("/api")
 	{
 		api.GET("/game/create", s.CreateGameHandler)
 		api.GET("/game/join/:gameId", s.JoinGameHandler)
 	}
 
-	// WebSocket route
+	// WebSocket
 	router.GET("/ws/:action/:gameId/:playerId", s.WebSocketHandler)
 
 	// Game routes
@@ -45,15 +43,15 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// }
 
 	// ---- FRONTEND (NO wildcard conflict) ----
-	// router.Static("/assets", "/assets")
+	router.StaticFS("/assets", http.Dir("./client/dist/assets"))
 
 	// router.GET("/", func(c *gin.Context) {
 	// 	c.File("./client/dist/index.html")
 	// })
 
-	// router.NoRoute(func(c *gin.Context) {
-	// 	c.File("./client/dist/index.html")
-	// })
+	router.NoRoute(func(c *gin.Context) {
+		c.File("./client/dist/index.html")
+	})
 
 	return router.Handler()
 }

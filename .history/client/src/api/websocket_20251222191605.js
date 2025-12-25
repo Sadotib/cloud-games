@@ -1,19 +1,13 @@
 // import { addLog } from "./newgame.js"
 import { showGameScreen } from "../ui/ui.js"
 import { updateRoomStatusUI } from "../ui/ui.js"
-import { API_BASE } from "./newgame.js"
 
 
 let socket = null;
 
 export function connectWebSocket(action, gameId, playerId) {
 
-    const wsBase = API_BASE.replace(/^http/, "ws");
-     const wsBaseWithPort = wsBase.concat("");
-    const wsUrl = `/ws/${action}/${gameId}/${playerId}`;
-
-    console.log("wsURL:", wsUrl);
-
+    const wsUrl = `ws://localhost:8080/ws/${action}/${gameId}/${playerId}`
     console.log("Connecting WebSocket to:", wsUrl);
     // addLog("Connecting WebSocket → " + wsUrl)
 
@@ -34,7 +28,7 @@ export function connectWebSocket(action, gameId, playerId) {
         console.log("WebSocket message data (raw):", event.data);
         const data = JSON.parse(event.data);
         console.log("WebSocket message data:", data);
-
+        
         if (data.type === "room_status") {
             updateRoomStatusUI(data);
             return;

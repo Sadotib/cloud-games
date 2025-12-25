@@ -10,7 +10,7 @@ import { connectWebSocket } from "./websocket.js"
 //     logBox.scrollTop = logBox.scrollHeight
 // }
 
-export const API_BASE = `${location.protocol}//${location.hostname}:8080`;
+const API_BASE = `${location.protocol}//${location.hostname}:8080`;
 console.log("API_BASE:", API_BASE);
 
 export function createNewGame() {
@@ -20,7 +20,7 @@ export function createNewGame() {
         // addLog("Starting game...");
 
         try {
-            const response = await fetch(`/api/game/create`, {
+            const response = await fetch(`${API_BASE}/game/create/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

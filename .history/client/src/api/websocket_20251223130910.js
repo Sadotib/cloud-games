@@ -8,9 +8,9 @@ let socket = null;
 
 export function connectWebSocket(action, gameId, playerId) {
 
+    // const wsUrl = `ws://${API_BASE}/ws/${action}/${gameId}/${playerId}`
     const wsBase = API_BASE.replace(/^http/, "ws");
-     const wsBaseWithPort = wsBase.concat("");
-    const wsUrl = `/ws/${action}/${gameId}/${playerId}`;
+    const wsUrl = `${wsBase}/ws/${action}/${gameId}/${playerId}`;
 
     console.log("wsURL:", wsUrl);
 

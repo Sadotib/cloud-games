@@ -20,8 +20,6 @@ func (s *Server) RegisterRoutes() http.Handler {
 	}))
 
 	// API
-
-	router.GET("/", s.HelloTestHandler)
 	api := router.Group("/api")
 	{
 		api.GET("/game/create", s.CreateGameHandler)

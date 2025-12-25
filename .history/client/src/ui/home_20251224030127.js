@@ -7,17 +7,17 @@ export function renderHome(app) {
 
     <div class="grid">
       <div class="game-tile" data-game="tictactoe">
-        <img src="public/tictactoe.svg" />
+        <img src="assets/tictactoe.svg" />
         <div class="game-label">Tic Tac Toe</div>
       </div>
 
       <div class="game-tile" data-game="rps">
-        <img src="public/rps.svg" />
+        <img src="/rps.svg" />
         <div class="game-label">Rock Paper Scissors</div>
       </div>
 
       <div class="game-tile" data-game="chopsticks">
-        <img src="public/chopsticks.svg" />
+        <img src="/chopsticks.svg" />
         <div class="game-label">Chopsticks</div>
       </div>
     </div>

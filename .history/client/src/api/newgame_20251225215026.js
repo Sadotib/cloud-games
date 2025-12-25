@@ -11,31 +11,33 @@ import { connectWebSocket } from "./websocket.js"
 // }
 
 export const API_BASE = `${location.protocol}//${location.hostname}:8080`;
-console.log("API_BASE:", API_BASE);
+console.log("[CLIENT] API_BASE:", API_BASE);
 
 export function createNewGame() {
     const startBtn = document.getElementById("createBtn")
     startBtn.addEventListener("click", async () => {
-        console.log("Starting game...");
+        console.log("[CLIENT] Starting game...");
         // addLog("Starting game...");
 
         try {
-            const response = await fetch(`/api/game/create`, {
+            const url = `${API_BASE}/api/game/create`;
+            console.log(`[CLIENT] Sending fetch to: ${url}`);
+            const response = await fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 }
             });
 
+            console.log(`[CLIENT] Response status:`, response.status);
             const data = await response.json();
             const playerId = data.playerId;
-            console.log("Game created:", data.gameId, "Player ID:", playerId);
+            console.log(`[CLIENT] Create response:`, data);
             // addLog("Game created with ID: " + data.gameId);
 
             const gameId = data.gameId;
 
             connectWebSocket("create", gameId, playerId);
-
 
             // alert(`Game created with ID: ${data.gameId}`);
         } catch (error) {
