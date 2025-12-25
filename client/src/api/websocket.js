@@ -1,79 +1,100 @@
-// import { addLog } from "./newgame.js"
-import { showGameScreen } from "../ui/ui.js"
-import { updateRoomStatusUI } from "../ui/ui.js"
-import { API_BASE } from "./newgame.js"
+import { API_BASE } from "./newgame.js";
 
+
+
+let session = {
+  gameId: null,
+  playerId: null,
+  hostId: null
+};
+
+export function getSession() {
+  return session;
+}
 
 let socket = null;
+const listeners = [];
 
 export function connectWebSocket(action, gameId, playerId) {
-
+    session.gameId = gameId;
+    session.playerId = playerId;
+    if (action === "create") {
+        session.hostId = playerId;
+    }
     const wsBase = API_BASE.replace(/^http/, "ws");
     const wsUrl = `${wsBase}/ws/${action}/${gameId}/${playerId}`;
 
-    console.log("wsURL:", wsUrl);
-
     console.log("Connecting WebSocket to:", wsUrl);
-    // addLog("Connecting WebSocket → " + wsUrl)
 
-    socket = new WebSocket(wsUrl)
+    socket = new WebSocket(wsUrl);
 
     socket.onopen = () => {
-
-        // addLog("WebSocket CONNECTED")
         console.log("WebSocket CONNECTED");
+    };
 
-        showGameScreen(gameId, playerId);   // ⬅ open game screen here!
-    }
-    socket.onclose = () => console.log("WebSocket DISCONNECTED")
-    socket.onerror = (err) => console.log("WebSocket ERROR: " + err)
+    socket.onclose = () => {
+        console.log("WebSocket DISCONNECTED");
+    };
+
+    socket.onerror = (err) => {
+        console.error("WebSocket ERROR:", err);
+    };
+
     socket.onmessage = (event) => {
-
-        console.log("WebSocket message event:", event);
-        console.log("WebSocket message data (raw):", event.data);
         const data = JSON.parse(event.data);
-        console.log("WebSocket message data:", data);
 
-        if (data.type === "room_status") {
-            updateRoomStatusUI(data);
+        if (data.type === "error") {
+            alert(data.message);
             return;
         }
-        // addLog("Received → " + event.data)
-        console.log("Received → " + event.data);
-    }
-    // // STEP 3: Send a WebSocket message
-    // sendBtn.addEventListener("click", () => {
-    //     if (!socket || socket.readyState !== WebSocket.OPEN) {
-    //         addLog("Cannot send message: WebSocket not open")
-    //         return
-    //     }
 
-    //     const text = document.getElementById("msgInput").value
-    //     const msg = JSON.stringify({
-    //         type: "chat",
-    //         from: playerId,
-    //         text: text
-    //     })
-
-    //     socket.send(msg)
-    //     addLog("Sent → " + text)
-    // })  
+        listeners.forEach(fn => fn(data));
+    };
 }
 
 export function disconnectWebSocket(playerId) {
-    if (!socket) {
-        console.log("No active WebSocket to disconnect");
-        // addLog("No active WebSocket to disconnect");
+  if (socket) {
+    try {
+      socket.onopen = null
+      socket.onmessage = null
+      socket.onclose = null
+      socket.onerror = null
+
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.close(1000, `${playerId} closed connection`)
+      }
+    } catch (e) {
+      console.warn("WebSocket cleanup error", e)
+    }
+  }
+
+  socket = null
+
+  // FULL session reset
+  session.gameId = null
+  session.playerId = null
+  session.hostId = null
+
+  // REMOVE ALL LISTENERS
+  listeners.length = 0
+}
+
+
+
+export function addSocketListener(fn) {
+    listeners.push(fn);
+}
+
+export function removeSocketListener(fn) {
+    const index = listeners.indexOf(fn);
+    if (index !== -1) listeners.splice(index, 1);
+}
+
+export function sendSocketMessage(data) {
+    if (!socket || socket.readyState !== WebSocket.OPEN) {
+        console.error("WebSocket not connected");
         return;
     }
 
-    if (socket.readyState === WebSocket.OPEN) {
-        socket.close(1000, `${playerId} closed connection`);
-        console.log(`WebSocket CLOSED by ${playerId}`);
-    } else {
-        console.log("WebSocket was not open");
-        // addLog("WebSocket was not open");
-    }
-
-    socket = null; // optional: cleanup
+    socket.send(JSON.stringify(data));
 }

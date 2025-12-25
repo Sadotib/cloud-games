@@ -1,5 +1,7 @@
 // import { showGameScreen } from "../ui.js"
 import { connectWebSocket } from "./websocket.js"
+import { showGameHomeScreen } from '../ui/ui.js'
+
 
 
 // let playerId = "bitopan"
@@ -35,6 +37,7 @@ export function createNewGame() {
             const gameId = data.gameId;
 
             connectWebSocket("create", gameId, playerId);
+
 
 
             // alert(`Game created with ID: ${data.gameId}`);

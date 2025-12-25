@@ -1,6 +1,7 @@
 import './style.css'
 import { renderHome } from './ui/home.js'
 import { renderGameHome } from './ui/gameHome.js'
+import { renderTicTacToeGame } from './ui/tictactoe.js'
 
 const app = document.querySelector('#app')
 
@@ -9,12 +10,22 @@ function router() {
 
   if (path === '/' || path === '') {
     renderHome(app)
-  } else if (path.startsWith('/game/')) {
-    const game = path.split('/')[2]
-    renderGameHome(app, game)
-  } else {
-    app.innerHTML = `<h2>404 – Page not found</h2>`
+    return
   }
+
+  // 👉 ACTUAL GAME SCREEN
+  if (path === '/game/tictactoe/play') {
+    renderTicTacToeGame(app)
+    return
+  }
+
+  // 👉 LOBBY SCREEN
+  if (path === '/game/tictactoe') {
+    renderGameHome(app, 'tictactoe')
+    return
+  }
+
+  app.innerHTML = `<h2>404 – Page not found</h2>`
 }
 
 // handle back/forward
