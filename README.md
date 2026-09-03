@@ -1,13 +1,10 @@
-Copy everything below and paste it directly into your `README.md`:
 
-````markdown
-#  Cloud Games
+
+# Cloud Games
 
 A web-based cloud gaming project built with a **Go backend** and a modern **Vite-powered frontend**.
 
 Cloud Games is an experiment in building real-time, browser-accessible gaming experiences using technologies such as HTTP servers, WebSockets, and a lightweight frontend architecture.
-
->  **Work in Progress**
 
 
 ---
@@ -61,7 +58,7 @@ cloud-games/
 ├── Makefile                 # Development commands
 ├── go.mod
 └── README.md
-````
+
 
 ---
 
