@@ -12,7 +12,7 @@ import { showGameHomeScreen } from '../ui/ui.js'
 //     logBox.scrollTop = logBox.scrollHeight
 // }
 
-export const API_BASE = `${location.protocol}//${location.hostname}`;
+export const API_BASE = `${location.protocol}//${location.hostname}:8080`;
 console.log("API_BASE:", API_BASE);
 
 export function createNewGame() {

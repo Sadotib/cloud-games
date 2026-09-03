@@ -23,7 +23,7 @@ export function renderHome(app) {
     </div>
   `
 
-  document.querySelectorAll('.game-tile').forEach(tile => {
+  document.querySelector('.game-tile').forEach(tile => {
     tile.onclick = () => {
       const game = tile.dataset.game
       history.pushState({}, '', `/game/${game}`)
