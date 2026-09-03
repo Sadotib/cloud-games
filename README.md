@@ -1,28 +1,22 @@
 Copy everything below and paste it directly into your `README.md`:
 
 ````markdown
-# ☁️ Cloud Games
+#  Cloud Games
 
 A web-based cloud gaming project built with a **Go backend** and a modern **Vite-powered frontend**.
 
 Cloud Games is an experiment in building real-time, browser-accessible gaming experiences using technologies such as HTTP servers, WebSockets, and a lightweight frontend architecture.
 
-> 🚧 **Work in Progress**
->
-> This project is currently under active development.
+>  **Work in Progress**
+
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🎮 Browser-based gaming interface
-- ⚡ Go-powered backend
-- 🔌 WebSocket support for real-time communication
-- 🌐 HTTP API server
-- 🎨 Modern frontend powered by Vite
-- 🔄 Live backend reloading during development
-- 🛑 Graceful server shutdown
-- 🔧 Environment variable configuration
+-  Browser-based gaming interface
+-  Go-powered backend
+-  WebSocket support for real-time communication
 
 ---
 
@@ -71,7 +65,7 @@ cloud-games/
 
 ---
 
-# 🚀 Getting Started
+#  Getting Started
 
 ## Prerequisites
 
@@ -107,7 +101,7 @@ You can change the port depending on your local setup.
 
 ---
 
-# 🖥 Running the Backend
+#  Running the Server
 
 The backend is written in Go.
 
@@ -130,21 +124,6 @@ go run cmd/api/main.go
 ```bash
 make build
 ```
-
----
-
-## Run Tests
-
-```bash
-make test
-```
-
-This runs:
-
-```bash
-go test ./... -v
-```
-
 ---
 
 ## Build and Test
@@ -167,7 +146,7 @@ The project uses **Air** for Go live reloading.
 
 ---
 
-# 🎨 Running the Frontend
+#  Running the Client
 
 Navigate to the client directory:
 
@@ -191,7 +170,7 @@ Vite will provide a local URL where you can access the frontend.
 
 ---
 
-# 🔌 Real-Time Communication
+#  Real-Time Communication
 
 The project includes support for WebSockets.
 
@@ -205,98 +184,3 @@ WebSockets can be used for features such as:
 
 ---
 
-# 🛑 Graceful Shutdown
-
-The backend handles shutdown signals and attempts to close the server gracefully.
-
-When the application receives:
-
-```text
-SIGINT
-SIGTERM
-```
-
-the server is given time to finish active requests before shutting down.
-
----
-
-# 🧹 Clean Build Files
-
-To remove build artifacts:
-
-```bash
-make clean
-```
-
----
-
-# 🗺 Roadmap
-
-Some potential future improvements for the project:
-
-* [ ] User authentication
-* [ ] Game library
-* [ ] Game sessions
-* [ ] WebSocket-based real-time communication
-* [ ] Multiplayer support
-* [ ] Game streaming experiments
-* [ ] Controller support
-* [ ] User profiles
-* [ ] Session management
-* [ ] Cloud deployment
-* [ ] Monitoring and logging
-
----
-
-# 🤝 Contributing
-
-Contributions, ideas, and suggestions are welcome.
-
-1. Fork the repository.
-2. Create a new branch:
-
-```bash
-git checkout -b feature/your-feature-name
-```
-
-3. Make your changes.
-4. Commit your changes:
-
-```bash
-git commit -m "Add your feature"
-```
-
-5. Push your branch:
-
-```bash
-git push origin feature/your-feature-name
-```
-
-6. Open a Pull Request.
-
----
-
-# 📄 License
-
-This project currently does not specify a license.
-
-If you plan to make the project open source, consider adding a license such as:
-
-* MIT
-* Apache 2.0
-* GPL
-
----
-
-# 👨‍💻 Author
-
-**Bitopan Das**
-
-GitHub: [@Sadotib](https://github.com/Sadotib)
-
----
-
-<p align="center">
-  Built with Go ⚡ and the Web 🎮
-</p>
-```
